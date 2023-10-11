@@ -1,5 +1,7 @@
 # WIP for an achievement steam tracker using react
 
+It will use react to create a live tracker so achievement hunters car follow their hunt 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
