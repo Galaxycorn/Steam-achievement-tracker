@@ -4,15 +4,16 @@ import HomePage from './Page/Home';
 import Profile from './User/Profile';
 import AchievementList from './Page/AchievementList';
 import { Header } from './Components/Header';
+import paths from './Utils/Routes/Paths';
 
 function App() {
     return (
         <Router>
             <Header />
             <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/Profile" element={<Profile />} />
-                <Route path="/GameAchievementList" element={<AchievementList />} />
+                <Route path={paths.home} element={<HomePage />} />
+                <Route path={paths.profile} element={<Profile />} />
+                <Route path={paths.achievementList} element={<AchievementList />} />
             </Routes>
         </Router>
     );

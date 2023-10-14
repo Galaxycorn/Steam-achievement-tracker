@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import React from 'react';
+import paths from '../Utils/Routes/Paths';
 
 const NavContainer = styled.nav`
     padding: 30px;
@@ -20,9 +22,9 @@ const StyledLink = styled(Link)`
 export function Header() {
     return (
         <NavContainer>
-            <StyledLink to="/">Home</StyledLink>
-            <StyledLink to="/Profile">Profile</StyledLink>
-            <StyledLink to="/GameAchievementList">Game info</StyledLink>
+            <StyledLink to={paths.home}>Home</StyledLink>
+            <StyledLink to={paths.profile}>Profile</StyledLink>
+            <StyledLink to={paths.achievementList}>Game info</StyledLink>
         </NavContainer>
     );
 }

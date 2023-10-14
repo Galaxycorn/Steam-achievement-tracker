@@ -1,6 +1,7 @@
-import { useGetProfile } from '../Hooks/Controller';
+import { useGetProfile } from '../Hooks/API/useGetProfile';
 import { Loader } from '../Utils/Loader';
 import styled from 'styled-components';
+import { useEffect } from 'react';
 
 const NameText = styled.h1`
     font-size: 30px;
@@ -25,7 +26,15 @@ const LoaderWrapper = styled.div`
 `;
 
 export default function UserData() {
-    const { profileData, isLoading } = useGetProfile('http://127.0.0.1:5000/profile-data/76561198161762702');
+    const { profileData, isLoading } = useGetProfile('http://127.0.0.1:5000/profile-data/76561198070907322');
+
+    useEffect(() => {
+        if (!isLoading && profileData.length > 0) {
+            // Assuming you want to set the gameid of the first player in the list
+            localStorage.setItem('gameId', profileData[0].gameid);
+            localStorage.setItem('userId', profileData[0].steamid);
+        }
+    }, [isLoading, profileData]);
 
     return (
         <div>
@@ -37,7 +46,7 @@ export default function UserData() {
             ) : (
                 <ProfileWrapper>
                     {profileData.map((player: any) => (
-                        <div>
+                        <div key={player.steamid}>
                             <NameText>Name: {player.personaname}</NameText> <br />
                             <div>
                                 Avatar: <Picture src={player.avatarfull} alt={player.personaname} />

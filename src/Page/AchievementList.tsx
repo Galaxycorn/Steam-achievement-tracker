@@ -1,6 +1,9 @@
 import styled from 'styled-components';
-import { useGetAchievementListForGame, useGetAchievementListForGameWithUser } from '../Hooks/Controller';
+import React from 'react';
+
 import { Loader, LoaderWrapper } from '../Utils/Loader';
+import { useGetAchievementListForGame } from '../Hooks/API/useGetAchievementList';
+import { useGetAchievementListForUser } from '../Hooks/API/useGetAchievementListForUser';
 
 const CardWrapper = styled.div`
     display: grid;
@@ -15,13 +18,23 @@ const Image = styled.img`
 `;
 
 export default function AchievementList() {
-    const { gameAchievementList, isLoading } = useGetAchievementListForGame(
-        'http://127.0.0.1:5000/game-data/achievement-data/2250600/english',
-    );
+    const gameId = localStorage.getItem('gameId');
+    let gameAchievementList = [];
+    let userAchievementList: { achieved: number }[] = [];
+    let isLoading = false;
+    let isLoadingUser = false;
 
-    const { userAchievementList, isLoadingUser } = useGetAchievementListForGameWithUser(
-        'http://127.0.0.1:5000/game-data/user-achievement-list/2250600/76561198161762702',
-    );
+    if (gameId === undefined || gameId === null) {
+        ({ gameAchievementList, isLoading } = useGetAchievementListForGame(
+            `http://127.0.0.1:5000/game-data/achievement-data/${gameId}/english`,
+        ));
+
+        ({ userAchievementList, isLoadingUser } = useGetAchievementListForUser(
+            `http://127.0.0.1:5000/game-data/user-achievement-list/${gameId}/76561198070907322`,
+        ));
+    } else {
+        return <div>No game launched at the moment</div>;
+    }
 
     return (
         <div>
@@ -32,7 +45,7 @@ export default function AchievementList() {
             ) : (
                 <CardWrapper>
                     {gameAchievementList?.map((achievement, i) => (
-                        <li key={i}>
+                        <li key={achievement + i}>
                             <span>Name : {achievement.displayName}</span> <br />
                             {userAchievementList[i].achieved === 1 ? (
                                 <Image src={achievement.icon} alt="unlocked achievement icon"></Image>
