@@ -1,5 +1,5 @@
-import { useGetProfile } from '../Hooks/API/useGetProfile';
-import { Loader } from '../Utils/Loader';
+import { useGetProfile } from '../../Hooks/API/useGetProfile';
+import { Loader } from '../../Utils/Loader';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 

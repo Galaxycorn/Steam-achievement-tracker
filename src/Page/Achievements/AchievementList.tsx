@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
 
-import { Loader, LoaderWrapper } from '../Utils/Loader';
-import { useGetAchievementListForGame } from '../Hooks/API/useGetAchievementList';
-import { useGetAchievementListForUser } from '../Hooks/API/useGetAchievementListForUser';
+import { Loader, LoaderWrapper } from '../../Utils/Loader';
+import { useGetAchievementListForGame } from '../../Hooks/API/useGetAchievementList';
+import { useGetAchievementListForUser } from '../../Hooks/API/useGetAchievementListForUser';
 
 const CardWrapper = styled.div`
     display: grid;
