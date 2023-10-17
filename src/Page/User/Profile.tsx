@@ -1,4 +1,5 @@
-import { useGetProfile } from '../../Hooks/API/useGetProfile';
+import { useGetSteamProfile } from '../../Hooks/API/useGetSteamProfileData';
+import { useGetProfile } from '../../Hooks/API/usetGetProfileId';
 import { Loader } from '../../Utils/Loader';
 import styled from 'styled-components';
 import { useEffect } from 'react';
@@ -26,20 +27,20 @@ const LoaderWrapper = styled.div`
 `;
 
 export default function UserData() {
-    const { profileData, isLoading } = useGetProfile('http://127.0.0.1:5000/profile-data/76561198070907322');
+    const { userId, isLoadingUser } = useGetProfile();
+    const { profileData, isLoading } = useGetSteamProfile(userId);
 
     useEffect(() => {
-        if (!isLoading && profileData.length > 0) {
-            // Assuming you want to set the gameid of the first player in the list
+        if (!isLoadingUser && profileData.length > 0) {
             localStorage.setItem('gameId', profileData[0].gameid);
-            localStorage.setItem('userId', profileData[0].steamid);
+            localStorage.setItem('userId', userId);
         }
-    }, [isLoading, profileData]);
+    }, [isLoadingUser, isLoading, profileData, userId]);
 
     return (
         <div>
             <h1>User Profile Data</h1>
-            {isLoading ? (
+            {isLoading && isLoadingUser ? (
                 <LoaderWrapper>
                     <Loader />
                 </LoaderWrapper>

@@ -18,20 +18,17 @@ const Image = styled.img`
 `;
 
 export default function AchievementList() {
-    const gameId = localStorage.getItem('gameId');
+    let gameId = localStorage.getItem('gameId');
+    let userId = localStorage.getItem('userId');
     let gameAchievementList = [];
     let userAchievementList: { achieved: number }[] = [];
     let isLoading = false;
     let isLoadingUser = false;
 
-    if (gameId === undefined || gameId === null) {
-        ({ gameAchievementList, isLoading } = useGetAchievementListForGame(
-            `http://127.0.0.1:5000/game-data/achievement-data/${gameId}/english`,
-        ));
+    if (gameId && gameId.length !== 0 && userId && userId.length !== 0) {
+        ({ gameAchievementList, isLoading } = useGetAchievementListForGame(gameId));
 
-        ({ userAchievementList, isLoadingUser } = useGetAchievementListForUser(
-            `http://127.0.0.1:5000/game-data/user-achievement-list/${gameId}/76561198070907322`,
-        ));
+        ({ userAchievementList, isLoadingUser } = useGetAchievementListForUser(gameId, userId));
     } else {
         return <div>No game launched at the moment</div>;
     }

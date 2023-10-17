@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { getUserProfile } from '../../Services/ProfileService';
 
-export function useGetProfile(url: string) {
+export function useGetSteamProfile(userId: string) {
     const [profileData, setProfileData] = useState<any[]>([]);
     const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {
         setLoading(true);
-        getUserProfile(url)
+        getUserProfile(userId)
             .then((data) => {
                 setProfileData(data);
             })
@@ -17,7 +17,7 @@ export function useGetProfile(url: string) {
             .finally(() => {
                 setLoading(false);
             });
-    }, [url]);
+    }, [userId]);
 
     return { profileData, isLoading };
 }

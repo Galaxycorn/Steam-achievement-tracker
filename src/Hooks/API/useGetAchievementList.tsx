@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { getGameAchievementList } from '../../Services/GameService';
 
-export function useGetAchievementListForGame(url: string) {
+export function useGetAchievementListForGame(gameId: string) {
     const [gameAchievementList, setGameAchievementList] = useState<any[]>([]);
     const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {
         setLoading(true);
-        getGameAchievementList(url)
+        getGameAchievementList(gameId)
             .then((data) => {
                 setGameAchievementList(data);
             })
@@ -17,7 +17,7 @@ export function useGetAchievementListForGame(url: string) {
             .finally(() => {
                 setLoading(false);
             });
-    }, [url]);
+    }, [gameId]);
 
     return { gameAchievementList, isLoading };
 }
