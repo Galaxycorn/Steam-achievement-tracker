@@ -26,6 +26,7 @@ export function Header() {
             <StyledLink to={paths.profile}>Profile</StyledLink>
             <StyledLink to={paths.achievementList}>Game info</StyledLink>
             <StyledLink to={paths.config}>Config</StyledLink>
+            <StyledLink to={paths.gameList}>GameList</StyledLink>
         </NavContainer>
     );
 }
