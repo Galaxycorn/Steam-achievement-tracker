@@ -7,6 +7,7 @@ import { Header } from './Components/Header';
 import paths from './Utils/Routes/Paths';
 import Config from './Page/User/Config';
 import { AchievementGameList } from './Page/Achievements/AchievementGameList';
+import { Game } from './Page/Game/Game';
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                 <Route path={paths.achievementList} element={<AchievementList />} />
                 <Route path={paths.config} element={<Config />} />
                 <Route path={paths.gameList} element={<AchievementGameList />} />
+                <Route path="/gameSummary/:id" element={<Game />} />
             </Routes>
         </Router>
     );

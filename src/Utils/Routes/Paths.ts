@@ -1,9 +1,10 @@
 enum paths {
     home = "",
-    profile = "Profile",
-    achievementList = "GameAchievementList",
-    config = "Config",
-    gameList = "GameList",
+    profile = "profile",
+    achievementList = "gameAchievementList",
+    config = "config",
+    gameList = "gameList",
+    gameSummary = "gameSummary/:id"
 }
 
 export default paths;
